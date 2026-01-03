@@ -19,6 +19,7 @@ import MachinePage from './pages/MachinePage';
 import StatsPage from './pages/StatsPage';
 import BohnenPage from './pages/BohnenPage';
 import GlaeserPage from './pages/GlaeserPage';
+import LandingPage from './pages/LandingPage';
 
 import { KAFFEE_SORTEN } from './data'
 
@@ -175,6 +176,7 @@ function App() {
            {/* 3. DANN: Der Inhalt der Seiten */}
            <Routes>
                <Route path="/" element={
+                 currentUser ? (
                    <HomePage 
                        currentUser={currentUser}
                        coffeeCount={coffeeCount}
@@ -183,7 +185,10 @@ function App() {
                        handleToggleFav={handleToggleFav}
                        KAFFEE_SORTEN={KAFFEE_SORTEN}
                    />
-               } />
+                 ) : (
+                   <LandingPage currentUser={currentUser} />
+                 )
+             } />
                <Route path="/maschine" element={<MachinePage />} />
                <Route path="/bohnen" element={<BohnenPage />} />
                <Route path="/stats" element={<StatsPage />} />

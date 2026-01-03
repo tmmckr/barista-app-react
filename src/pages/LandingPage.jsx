@@ -1,45 +1,30 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Link brauchen wir nicht mehr, da wir Buttons nutzen
-// import { Link } from 'react-router-dom'; 
 
-// WICHTIG: Hier nehmen wir jetzt "onLoginClick" als Prop entgegen
 export default function LandingPage({ currentUser, onLoginClick }) {
   const navigate = useNavigate();
 
-  // Redirect wenn schon eingeloggt
+  // Redirect wenn User schon eingeloggt ist
   useEffect(() => {
     if (currentUser) {
       navigate('/'); 
     }
   }, [currentUser, navigate]);
 
-  // Inline styles (kannst du so lassen)
-  const styles = {
-    hero: {
-      minHeight: '90vh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
-      padding: '40px 20px',
-      position: 'relative',
-      zIndex: 10,
-    },
-  };
-
   return (
-    <div style={{ backgroundColor: '#2c1e16', overflowX: 'hidden', minHeight: '100vh', color: '#fff' }}>
+    <div>
       
+      {/* --- BACKGROUND BLOBS (Aus deiner CSS) --- */}
       <div className="aurora-blob blob-1"></div>
       <div className="aurora-blob blob-2"></div>
       <div className="aurora-blob blob-3"></div>
 
-      <section style={styles.hero}>
+      {/* --- HERO SECTION --- */}
+      <section className="hero">
         <div className="brand-badge">Private Coffee Club</div>
         
         <div className="logo-container">
+          {/* Pfad zum Logo anpassen, falls nötig */}
           <img src="/assets/img/logo.jpg" alt="Timo's Barista Bar Logo" className="hero-logo" />
         </div>
 
@@ -48,14 +33,11 @@ export default function LandingPage({ currentUser, onLoginClick }) {
         </p>
 
         <div className="cta-group">
-          {/* HIER WAR DER FEHLER:
-              Statt <Link to="/login"> nutzen wir jetzt einen Button mit onClick.
-              Das öffnet dein Modal!
-          */}
+          {/* Button ruft Login-Modal auf */}
           <button 
             onClick={onLoginClick} 
             className="btn-primary"
-            style={{ border: 'none', cursor: 'pointer', fontSize: '1.1rem', fontFamily: 'inherit' }}
+            style={{ border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
           >
             Jetzt bestellen ☕
           </button> 
@@ -63,11 +45,15 @@ export default function LandingPage({ currentUser, onLoginClick }) {
           <a href="#features" className="btn-secondary">Mehr erfahren</a>
         </div>
 
+        {/* --- APP MOCKUP (Wie im Screenshot 1) --- */}
         <div className="app-mockup">
+          {/* Zeile 1: Status */}
           <div style={{display:'flex', justifyContent:'space-between', marginBottom:'15px', borderBottom:'1px solid rgba(255,255,255,0.1)', paddingBottom:'10px'}}>
             <span style={{color:'#d4b483', fontWeight:'bold'}}>Status:</span>
             <span style={{color:'#4ade80'}}>● Barista bereit</span>
           </div>
+          
+          {/* Zeile 2: Beispiel Bestellung */}
           <div style={{background:'rgba(255,255,255,0.05)', padding:'15px', borderRadius:'10px', display:'flex', alignItems:'center', gap:'15px'}}>
             <div style={{fontSize:'2rem'}}>☕</div>
             <div style={{textAlign:'left'}}>
@@ -79,10 +65,12 @@ export default function LandingPage({ currentUser, onLoginClick }) {
         </div>
       </section>
 
+      {/* --- FEATURES SECTION (Wie im Screenshot 2) --- */}
       <section id="features" className="features">
         <h2 className="section-title"><span>Deine Vorteile</span></h2>
         
         <div className="feature-grid">
+          {/* Karte 1 */}
           <div className="feature-card">
             <span className="f-icon">⚡</span>
             <div className="f-title">Live Status</div>
@@ -91,6 +79,7 @@ export default function LandingPage({ currentUser, onLoginClick }) {
             </div>
           </div>
 
+          {/* Karte 2 */}
           <div className="feature-card">
             <span className="f-icon">📊</span>
             <div className="f-title">Stats & Wrapped</div>
@@ -99,6 +88,7 @@ export default function LandingPage({ currentUser, onLoginClick }) {
             </div>
           </div>
 
+          {/* Karte 3 */}
           <div className="feature-card">
             <span className="f-icon">🎡</span>
             <div className="f-title">Daily Spin & Rewards</div>
@@ -107,6 +97,7 @@ export default function LandingPage({ currentUser, onLoginClick }) {
             </div>
           </div>
           
+          {/* Karte 4 */}
           <div className="feature-card">
             <span className="f-icon">🍵</span>
             <div className="f-title">Saisonale Specials</div>
@@ -116,6 +107,7 @@ export default function LandingPage({ currentUser, onLoginClick }) {
           </div>
         </div>
 
+        {/* --- HALL OF FAME TEASER --- */}
         <div className="stats-teaser scroll-reveal">
           <div style={{fontSize:'3rem', marginBottom:'10px'}}>🏆</div>
           <h3 style={{color:'#d4b483', marginBottom:'10px'}}>Hall of Fame</h3>
@@ -123,7 +115,6 @@ export default function LandingPage({ currentUser, onLoginClick }) {
             Wer ist der größte Koffein-Junkie der Familie? <br/>Logge dich ein und kämpfe um Platz 1 im Leaderboard.
           </p>
           
-          {/* AUCH HIER: Button statt Link */}
           <button 
             onClick={onLoginClick} 
             className="btn-primary" 
@@ -134,6 +125,7 @@ export default function LandingPage({ currentUser, onLoginClick }) {
         </div>
       </section>
 
+      {/* --- FOOTER --- */}
       <footer className="landing-footer">
         &copy; 2025 Timo's Barista Bar Web App.<br/>
         Designed with ❤️ & ☕.

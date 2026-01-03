@@ -1,7 +1,15 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-// WICHTIG: 'set' wurde zu den imports hinzugefügt für sauberes Speichern mit ID
-import { getDatabase, ref, onValue, push, update, set, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, onValue, push, update, set, remove, runTransaction } from "firebase/database";
+
+// WICHTIG: Hier holen wir uns die Email-Funktionen
+import { 
+    getAuth, 
+    onAuthStateChanged, 
+    signOut, 
+    signInWithEmailAndPassword,     // Einloggen
+    createUserWithEmailAndPassword, // Registrieren
+    updateProfile                   // Namen speichern
+} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCy8RnpwpL0RdjfaU690j7mKAzr1fiWFXk",
@@ -17,4 +25,14 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
 
-const TOPIC_NAME = 'mamas-kaffee-123-geheim'; 
+export const TOPIC_NAME = 'mamas-kaffee-123-geheim'; 
+
+// Exportiere die neuen Funktionen
+export { 
+    app, db, auth, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    updateProfile, 
+    signOut, 
+    onAuthStateChanged 
+};

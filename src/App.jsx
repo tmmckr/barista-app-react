@@ -186,9 +186,12 @@ function App() {
                        KAFFEE_SORTEN={KAFFEE_SORTEN}
                    />
                  ) : (
-                   <LandingPage currentUser={currentUser} />
+                   <LandingPage 
+             currentUser={currentUser} 
+             onLoginClick={() => setLoginOpen(true)} 
+        />
                  )
-             } />
+             } />   
                <Route path="/maschine" element={<MachinePage />} />
                <Route path="/bohnen" element={<BohnenPage />} />
                <Route path="/stats" element={<StatsPage />} />

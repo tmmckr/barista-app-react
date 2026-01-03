@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-// Ensure your styles are imported if not globally applied
-// import '../assets/css/style.css'; 
+import { useNavigate } from 'react-router-dom';
+// Link brauchen wir nicht mehr, da wir Buttons nutzen
+// import { Link } from 'react-router-dom'; 
 
-export default function LandingPage({ currentUser }) {
+// WICHTIG: Hier nehmen wir jetzt "onLoginClick" als Prop entgegen
+export default function LandingPage({ currentUser, onLoginClick }) {
   const navigate = useNavigate();
 
-  // Redirect if already logged in
+  // Redirect wenn schon eingeloggt
   useEffect(() => {
     if (currentUser) {
-      navigate('/'); // Or wherever your main app page is
+      navigate('/'); 
     }
   }, [currentUser, navigate]);
 
-  // Inline styles for landing page specifics (or move to a CSS file)
+  // Inline styles (kannst du so lassen)
   const styles = {
     hero: {
       minHeight: '90vh',
@@ -26,14 +27,11 @@ export default function LandingPage({ currentUser }) {
       position: 'relative',
       zIndex: 10,
     },
-    // ... add other specific styles from your <style> block here if needed
-    // adapting CSS properties to camelCase (e.g., background-color -> backgroundColor)
   };
 
   return (
     <div style={{ backgroundColor: '#2c1e16', overflowX: 'hidden', minHeight: '100vh', color: '#fff' }}>
       
-      {/* Aurora Blobs - assume these classes are in your global CSS */}
       <div className="aurora-blob blob-1"></div>
       <div className="aurora-blob blob-2"></div>
       <div className="aurora-blob blob-3"></div>
@@ -42,7 +40,6 @@ export default function LandingPage({ currentUser }) {
         <div className="brand-badge">Private Coffee Club</div>
         
         <div className="logo-container">
-           {/* Ensure image path is correct for React (public folder) */}
           <img src="/assets/img/logo.jpg" alt="Timo's Barista Bar Logo" className="hero-logo" />
         </div>
 
@@ -51,9 +48,18 @@ export default function LandingPage({ currentUser }) {
         </p>
 
         <div className="cta-group">
-          {/* Use Link for internal navigation, or button to trigger login modal */}
-           {/* If login is a modal on the same page, change this logic */}
-          <Link to="/login" className="btn-primary">Jetzt bestellen ☕</Link> 
+          {/* HIER WAR DER FEHLER:
+              Statt <Link to="/login"> nutzen wir jetzt einen Button mit onClick.
+              Das öffnet dein Modal!
+          */}
+          <button 
+            onClick={onLoginClick} 
+            className="btn-primary"
+            style={{ border: 'none', cursor: 'pointer', fontSize: '1.1rem', fontFamily: 'inherit' }}
+          >
+            Jetzt bestellen ☕
+          </button> 
+          
           <a href="#features" className="btn-secondary">Mehr erfahren</a>
         </div>
 
@@ -116,7 +122,15 @@ export default function LandingPage({ currentUser }) {
           <p style={{color:'#ddd', marginBottom:'20px'}}>
             Wer ist der größte Koffein-Junkie der Familie? <br/>Logge dich ein und kämpfe um Platz 1 im Leaderboard.
           </p>
-          <Link to="/login" className="btn-primary" style={{padding: '10px 30px', fontSize: '1rem'}}>Zum Login</Link>
+          
+          {/* AUCH HIER: Button statt Link */}
+          <button 
+            onClick={onLoginClick} 
+            className="btn-primary" 
+            style={{ padding: '10px 30px', fontSize: '1rem', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            Zum Login
+          </button>
         </div>
       </section>
 
